@@ -1,0 +1,35 @@
+.footer {
+    margin: 10px auto;
+    width: 100%;
+    overflow-wrap: break-word;
+}
+
+.footer-row-1 {
+    align-self: center;
+    justify-content: center;
+    overflow-wrap: break-word;
+    text-align: center;
+    display: flex;
+    margin: auto;
+}
+
+.footer-row-1 p {
+    font-size: 14px;
+    color: rgb(25, 25, 25);
+    font-weight: 400;
+    margin-left: 10px;
+    
+}
+
+.footer-row-2 {
+    text-align: center;
+    font-size: 13px;
+    color: rgb(25, 25, 25);
+    font-weight: 400;
+}
+
+@media screen and (max-width: 1000px) {
+    .footer-row-1 p {
+        font-size: 12px;
+    }
+}
