@@ -1,12 +1,12 @@
 import { createContext, useContext } from "react";
-import { db } from "../lib/firebase.prod";
+import { db, auth } from "../lib/firebase.prod";
 
 const FirebaseContext = createContext(null)
 
 export default function FirebaseProvider({children, ...restProps }) {
 
     return (
-        <FirebaseContext.Provider value={{ db }}>
+        <FirebaseContext.Provider value={{ db, auth }}>
             {children}
         </FirebaseContext.Provider>
     )

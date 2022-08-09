@@ -3,17 +3,31 @@ import '../styles/login.css'
 import { useNavigate, Link } from 'react-router-dom'
 import * as ROUTES from '../constants/routes'
 import Footer from '../components/footer/footer'
+import { signInWithEmailAndPassword } from 'firebase/auth'
+import { FirebaseCont } from '../context/firebase'
 
 const Login = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
+    const auth = FirebaseCont()
     
     const navigate = useNavigate()
 
     const isInvalid = password === '' || email === ''
 
-    const handleLogin = () => {}
+    const handleLogin = async (event) => {
+      event.preventDefault()
+
+      try {
+        await signInWithEmailAndPassword(auth, email, password)
+        navigate(ROUTES.DASHBOARD)
+      } catch (error) {
+        setError(error.message)
+        setEmail('')
+        setPassword('')
+      }
+    }
 
     useEffect(() => {
         document.title = 'Login - Instagram'
@@ -22,9 +36,6 @@ const Login = () => {
     return (
       <>
         <div className="container">
-          <div className="section-1">
-            <img className="section-img" src="/images/iphone-with-profile.jpg" alt="iPhone with Instagram app" />
-          </div>
           <div className="section-2">
             <div className="login">
               <h1 className="logo-container">
@@ -50,13 +61,27 @@ const Login = () => {
                   onChange={({ target }) => setPassword(target.value)}
                   value={password}
                 />
-                <button
-                  disabled={isInvalid}
-                  type="submit"
-                  className="submit"
-                >
-                  Log In
-                </button>
+                { isInvalid ? 
+                  <>
+                    <button
+                      disabled={isInvalid}
+                      type="submit"
+                      className="submit_inactive"
+                    >
+                      Log In
+                    </button>
+                  </>
+                  : 
+                  <>
+                    <button
+                      disabled={isInvalid}
+                      type="submit"
+                      className="submit"
+                    >
+                      Log In
+                    </button>
+                  </>
+                  }
                 <p className="text-small">Forgot password?</p>
               </form>
             </div>
