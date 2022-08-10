@@ -6,6 +6,7 @@ import Footer from '../components/footer/footer'
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth'
 import { db, auth } from '../lib/firebase.prod'
 import { addDoc, collection } from 'firebase/firestore'
+import { doesUsernameExist } from '../services/firebase'
 
 
 const SignUp = () => {
@@ -21,6 +22,7 @@ const SignUp = () => {
 
     const handleSignUp = async (event) => {
         event.preventDefault()
+        console.log('userexists', doesUsernameExist(userName))
 
         try {
             const user = await createUserWithEmailAndPassword(auth, email, password)

@@ -1,0 +1,65 @@
+import React, { useContext } from 'react'
+import { auth } from '../../lib/firebase.prod'
+import { signOut } from 'firebase/auth'
+import { Link } from 'react-router-dom'
+import UserContext from '../../context/user'
+import * as ROUTES from '../../constants/routes'
+import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
+import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
+import './styles/header.css'
+
+const Header = () => {
+  const { user } = useContext(UserContext)
+  console.log(user)
+
+  const SignOut =  async () => {
+    signOut(auth)
+  }
+
+  return (
+    <header>
+      <div className='container'>
+        <div className='header__icon'>
+          <Link to={ROUTES.DASHBOARD} aria-label='Instagram logo'>
+            <img src='/images/logo.png' alt='Instagram' className='header__logo' />
+          </Link>
+        </div>
+        <div className='header__panel'>
+          { user ? (
+            <>
+              <Link to={ROUTES.DASHBOARD} aria-label='Dashboard'>
+                <HomeOutlinedIcon className='home__icon'/>
+              </Link>
+              <button
+                type='button'
+                className='logout__btn'
+                onClick={SignOut}
+                onKeyDown={(event) => {
+                  if (event.key === 'Enter') {
+                    SignOut()
+                  }
+                }}
+              >
+                <LogoutOutlinedIcon />
+              </button>
+              <div className='avatar'>
+                <Link to={`/p/${user.displayName}`}>
+                  <img 
+                    className='header__avatar' 
+                    src='/images/avatars/dali.jpg'
+                    alt='profile-avatar'
+                  />
+                </Link>
+              </div>
+
+            </>
+          ) : (
+            <p>SignOut</p>
+          )}
+        </div>
+      </div>
+    </header>
+  )
+}
+
+export default Header
