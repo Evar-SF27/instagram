@@ -1,8 +1,8 @@
 header {
-    height: 3.5rem;
+    height: 4rem;
     background-color: white;
     border-bottom: 2px solid rgb(214, 214, 214);
-    padding: 2% 5%;
+    padding: 15px 3%;
 }
 
 .container {
@@ -20,7 +20,7 @@ header {
 .header__panel {
     display: flex;
     justify-content: space-between;
-    width: 100px;
+    width: fit-content;
 }
 
 .home__icon {
@@ -28,15 +28,38 @@ header {
     color: black;
     width: 30px;
     height: 30px;
+    margin-right: 10px;
 }
 
 .logout__btn {
     background-color: rgba(255, 255, 255, 0);
     border: none;
+    margin-right: 10px;
 }
 
 .header__avatar {
     width: 30px;
     height: 30px;
     border-radius: 50%;
+}
+
+.login__btn {
+    background-color: rgb(0, 102, 255);
+    width: 80px;
+    height: 100%;
+    padding: 7px 10px;
+    color: white;
+    font-weight: 700;
+    border: none;
+    margin-right: 10px;
+}
+
+.signup__btn {
+    background-color: rgb(245, 245, 245);
+    width: 80px;
+    height: 100%;
+    padding: 7px 10px;
+    color:  rgb(0, 102, 255);
+    font-weight: 800;
+    border: none;
 }

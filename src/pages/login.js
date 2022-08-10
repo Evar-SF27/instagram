@@ -4,13 +4,12 @@ import { useNavigate, Link } from 'react-router-dom'
 import * as ROUTES from '../constants/routes'
 import Footer from '../components/footer/footer'
 import { signInWithEmailAndPassword } from 'firebase/auth'
-import { FirebaseCont } from '../context/firebase'
+import { auth } from '../lib/firebase.prod'
 
 const Login = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
-    const auth = FirebaseCont()
     
     const navigate = useNavigate()
 
@@ -18,6 +17,8 @@ const Login = () => {
 
     const handleLogin = async (event) => {
       event.preventDefault()
+      console.log(email)
+      console.log(password)
 
       try {
         await signInWithEmailAndPassword(auth, email, password)

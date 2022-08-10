@@ -46,7 +46,7 @@ const Header = () => {
                 <Link to={`/p/${user.displayName}`}>
                   <img 
                     className='header__avatar' 
-                    src='/images/avatars/dali.jpg'
+                    src={`/images/avatars/${user.displayName}.jpg`}
                     alt='profile-avatar'
                   />
                 </Link>
@@ -54,7 +54,18 @@ const Header = () => {
 
             </>
           ) : (
-            <p>SignOut</p>
+            <>
+              <Link to={ROUTES.LOGIN}>
+                <button className='login__btn'>
+                  Log In
+                </button>
+              </Link>
+              <Link to={ROUTES.SIGN_UP}>
+                <button className='signup__btn'>
+                  Sign Up
+                </button>
+              </Link>
+            </>
           )}
         </div>
       </div>

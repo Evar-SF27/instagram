@@ -1,0 +1,6 @@
+.dashboard {
+    display: grid;
+    grid-template-columns: 67% 33%;
+    gap: 4rem;
+    padding: 15px 25px;
+}
