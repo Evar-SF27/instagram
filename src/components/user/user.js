@@ -9,7 +9,15 @@ const User = ({ username, fullname }) =>
     <Skeleton count={1} height={61} />
   ) : (
     <Link to={`/p/${username}`} className='user__link'>
-      <p>{username}</p>
+      <img 
+        className='user__avatar'
+        src={`/images/avatars/${username}.jpg`}
+        alt='User avatar'
+      />
+      <div className='user__text'>
+        <p className='text__bold'>{username}</p>
+        <p className='text__sm'>{fullname}</p>
+      </div>
     </Link>
   )
 
@@ -20,6 +28,6 @@ const User = ({ username, fullname }) =>
 export default User
 
 User.propTypes = {
-  username: PropTypes.string,
-  fullName: PropTypes.string
+  username: PropTypes.string.isRequired,
+  fullName: PropTypes.string.isRequired
 }
