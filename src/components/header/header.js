@@ -10,7 +10,6 @@ import './styles/header.css'
 
 const Header = () => {
   const { user } = useContext(UserContext)
-  console.log(user)
 
   const SignOut =  async () => {
     signOut(auth)

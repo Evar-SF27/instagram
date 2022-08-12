@@ -1,6 +1,8 @@
 .dashboard {
     display: grid;
+    width: 95%;
+    margin: auto;
     grid-template-columns: 67% 33%;
-    gap: 4rem;
+    gap: 1rem;
     padding: 15px 25px;
 }

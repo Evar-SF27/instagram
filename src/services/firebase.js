@@ -1,13 +1,31 @@
-import { collection, getDoc, query, where } from 'firebase/firestore'
+import { collection, getDocs } from 'firebase/firestore'
 import { db } from '../lib/firebase.prod'
 
-export async function doesUsernameExist(username) {
+const getUsers = async () => {
     const userCollection = collection(db, 'users')
+    const res = await getDocs(userCollection)
+    const users = res.docs.map((user) => ({
+        ...user.data(),
+        docId: user.id
+    }))
 
-    const res = query(userCollection, where('username', '==', username))
-    const results = getDoc(res)
+    return users
+}
 
-    console.log(results)
-    const n = results.docs.map((user) => user.data().length > 0)
+
+export async function doesUsernameExist(username) {
+    
+    const users = await getUsers()
+    const user = users.find((user) => user.username === username)
+    const n = user.length > 0
+
     return n
+}
+
+export async function getUserByUserId(userId) {
+    const users = await getUsers()
+    const user = users.find((user) => user.userId === userId)
+
+    return user
+
 }
