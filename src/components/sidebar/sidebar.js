@@ -1,10 +1,16 @@
-import React from 'react'
+import React, { memo } from 'react'
+import useUser from '../../hooks/use-user'
+import User from '../user/user'
+import Suggestion from '../suggestion/suggestion'
 import './styles/sidebar.css'
 
 const SideBar = () => {
+  const { user } = useUser()
+  
   return (
     <div className='sidebar__main'>
-      <p>This is the sidebar</p>
+      <User username={user.username} fullname={user.fullname}/>
+      <Suggestion userId={user.userId}/>
     </div>
   )
 }
