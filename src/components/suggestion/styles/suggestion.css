@@ -22,7 +22,7 @@
     display: grid;
     height: 80px;
     grid-template-columns: 45px 40% 30%;
-    gap: 5px;
+    gap: 10px;
 }
 
 .suggestion__avatar {
