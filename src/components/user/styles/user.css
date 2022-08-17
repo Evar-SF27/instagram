@@ -1,13 +1,17 @@
 .user__link {
     display: grid;
+    background-color: white;
+    padding: 20px 10px;
+    border-radius: 10px;
+    width: 100%;
     grid-template-columns: 50px 70%;
     text-decoration: none;
     gap: 5px;
 }
 
 .user__avatar {
-    width: 50px;
-    height: 50px;
+    width: 45px;
+    height: 45px;
     border-radius: 50%;
 }
 
@@ -21,7 +25,7 @@
 }
 
 .text__sm {
-    font-weight: 600;
+    font-weight: 500;
     font-size: 14px;
-    color: rgb(106, 106, 106);
+    color: rgb(155, 155, 155);
 }

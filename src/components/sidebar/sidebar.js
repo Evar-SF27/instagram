@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import React from 'react'
 import useUser from '../../hooks/use-user'
 import User from '../user/user'
 import Suggestion from '../suggestion/suggestion'
@@ -10,7 +10,7 @@ const SideBar = () => {
   return (
     <div className='sidebar__main'>
       <User username={user.username} fullname={user.fullname}/>
-      <Suggestion userId={user.userId}/>
+      <Suggestion userId={user.userId} following={user.following}/>
     </div>
   )
 }

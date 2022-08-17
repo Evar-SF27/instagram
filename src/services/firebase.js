@@ -27,5 +27,15 @@ export async function getUserByUserId(userId) {
     const user = users.find((user) => user.userId === userId)
 
     return user
+}
+
+export async function getSuggestedProfiles(userId, following) {
+    const users = await getUsers()
+    let suggestedUsers = users.filter((user) => user.userId !== userId)
+    following.map((id) => (
+        suggestedUsers = suggestedUsers.filter((user) => user.userId !== id)
+    ))
+    console.log(suggestedUsers)
+    return suggestedUsers
 
 }

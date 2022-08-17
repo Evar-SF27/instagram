@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import Skeleton from 'react-loading-skeleton'
 import { Link } from 'react-router-dom'
@@ -25,9 +25,11 @@ const User = ({ username, fullname }) =>
   
 
 
-export default User
+export default memo(User)
 
 User.propTypes = {
   username: PropTypes.string.isRequired,
   fullName: PropTypes.string.isRequired
 }
+
+User.whyDidYouRender = true
