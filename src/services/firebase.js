@@ -14,17 +14,6 @@ const getUsers = async () => {
     return users
 }
 
-const getAllPhotos = async () => {
-    const res = await getDocs(photoCollection)
-    const photos = res.docs.map((photo) => ({
-        ...photo.data(),
-        docId: photo.id
-    }))
-
-    return photos
-}
-
-
 export async function doesUsernameExist(username) {
     
     const users = await getUsers()
