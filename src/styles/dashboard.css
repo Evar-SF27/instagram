@@ -6,4 +6,18 @@
     gap: 1rem;
     padding: 15px 30px;
     margin: auto;
+
+    
+}
+
+@media (max-width: 1000px) {
+    .dashboard {
+        display: flex;
+    }
+    .sidebar__main {
+        display: none;
+    }
+    .timeline__main {
+        width: 100%;
+    }
 }

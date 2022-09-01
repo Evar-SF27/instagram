@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Story from './story'
 import Skeleton from 'react-loading-skeleton'
-import { getFollowing } from '../../services/firebase'
+import { getFollowing, getPhotos } from '../../services/firebase'
 import './styles/story.css'
 import 'react-loading-skeleton/dist/skeleton.css'
 
@@ -13,6 +13,7 @@ const Stories = ({ user }) => {
     const followingUsers = async () => {
       const profiles = await getFollowing(user.userId, user.following)
       setStories(profiles)
+      const photos = await getPhotos(user.userId, user.following)
     }
 
     if (user?.userId) {
