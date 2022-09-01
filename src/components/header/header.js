@@ -1,15 +1,19 @@
 import React, { useContext } from 'react'
 import { auth } from '../../lib/firebase.prod'
 import { signOut } from 'firebase/auth'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import UserContext from '../../context/user'
 import * as ROUTES from '../../constants/routes'
-import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
-import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
+import HomeIcon from '@mui/icons-material/Home'
+import ExploreOutlinedIcon from '@mui/icons-material/ExploreOutlined'
+import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined'
+import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined'
+import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined'
 import './styles/header.css'
 
 const Header = () => {
   const { user } = useContext(UserContext)
+  const navigate = useNavigate
 
   const SignOut =  async () => {
     signOut(auth)
@@ -26,12 +30,37 @@ const Header = () => {
         <div className='header__panel'>
           { user ? (
             <>
-              <Link to={ROUTES.DASHBOARD} aria-label='Dashboard'>
-                <HomeOutlinedIcon className='home__icon'/>
-              </Link>
               <button
                 type='button'
-                className='logout__btn'
+                className='header__btn'
+                onClick={() => { navigate(ROUTES.DASHBOARD) }}
+              >
+                <HomeIcon className='btn__icon'/>
+              </button>
+              <button
+                type='button'
+                className='header__btn'
+                onClick={() => { navigate(ROUTES.DASHBOARD) }}
+              >
+                <AddBoxOutlinedIcon />
+              </button>
+              <button
+                type='button'
+                className='header__btn'
+                onClick={() => { navigate(ROUTES.DASHBOARD) }}
+              >
+                <ExploreOutlinedIcon />
+              </button>
+              <button
+                type='button'
+                className='header__btn'
+                onClick={() => { navigate(ROUTES.DASHBOARD) }}
+              >
+                <FavoriteBorderOutlinedIcon />
+              </button>
+              <button
+                type='button'
+                className='header__btn'
                 onClick={SignOut}
                 onKeyDown={(event) => {
                   if (event.key === 'Enter') {

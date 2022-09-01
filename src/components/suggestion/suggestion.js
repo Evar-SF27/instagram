@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css';
 import { getSuggestedProfiles } from '../../services/firebase'
 import Suggested from './suggest'
 import './styles/suggestion.css'
@@ -20,7 +21,10 @@ const Suggestion = ({ userId, following }) => {
   }, [userId, following])
 
   return !profiles ? (
-    <Skeleton count={1} height={150} className='suggestion__skeleton' />
+    <>
+      <Skeleton height={50} className='suggestion__skeleton' />
+      <Skeleton height={150} count={2} className='suggestion__skeleton' />
+    </>
   ) : profiles.length > 0 ? (
     <div className='suggestion__box'>
       <div className='suggestion__panel'>
@@ -28,9 +32,12 @@ const Suggestion = ({ userId, following }) => {
         {profiles.map((user) => {
           return (
             <Suggested 
-              userId = {user.userId}
+              key={user.docId}
+              userId = {userId}
               username = {user.username}
               fullName = {user.fullName}
+              userDocId = {user.docId}
+              profileId = {user.userId}
             />
           )
         })}

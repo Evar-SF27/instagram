@@ -1,18 +1,24 @@
 .user__link {
     display: grid;
     background-color: white;
-    padding: 20px 10px;
+    padding: 20px 20px;
     border-radius: 10px;
     width: 100%;
-    grid-template-columns: 50px 70%;
+    margin: auto;
+    align-items: center;
+    grid-template-columns: 70px 70%;
     text-decoration: none;
     gap: 5px;
 }
 
 .user__avatar {
-    width: 45px;
-    height: 45px;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
+}
+
+.user__skeleton {
+    border-radius: 10px;
 }
 
 .user__text p {
@@ -21,11 +27,11 @@
 
 .text__bold {
     font-weight: 700;
-    font-size: 16px;
+    font-size: 18px;
 }
 
 .text__sm {
     font-weight: 500;
-    font-size: 14px;
+    font-size: 16px;
     color: rgb(155, 155, 155);
 }

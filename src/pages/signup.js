@@ -31,7 +31,7 @@ const SignUp = () => {
             await addDoc(collection(db, 'users'), {
                 userId: user.user.uid,
                 username: userName.toLowerCase(),
-                fullname: fullName.toLowerCase(),
+                fullName: fullName.toLowerCase(),
                 emailAddress: email.toLowerCase(),
                 followers: [],
                 following: [],

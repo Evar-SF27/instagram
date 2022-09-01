@@ -1,13 +1,17 @@
 .suggestion__box {
     background-color: white;
     margin-top: 10px;
-    padding: 20px 20px;
+    padding: 20px 10px;
     border-radius: 25px;
 }
 
 .suggestion__panel {
     align-items: center;
     justify-content: center;
+}
+
+.suggestion__skeleton {
+    border-radius: 10px;
 }
 
 .suggestion__title {
@@ -21,8 +25,9 @@
     border-bottom: 1px solid rgb(233, 233, 233);
     display: grid;
     height: 80px;
-    grid-template-columns: 45px 40% 30%;
+    grid-template-columns: 45px 50% 20%;
     gap: 10px;
+    margin-left: 10px;
 }
 
 .suggestion__avatar {
@@ -32,8 +37,14 @@
 }
 
 .suggestion__text-bold {
-    font-weight: bolder;
+    font-weight: bold;
     font-size: 15px;
+    
+}
+
+a {
+    text-decoration: none;
+    color: black;
 }
 
 .suggestion__text-sm {
@@ -43,9 +54,10 @@
 }
 
 .follow__btn {
-    background-color: rgb(0, 140, 255);
+    background-color: rgba(255, 255, 255, 0);
+    color: rgb(0, 140, 255);
+    font-weight: bolder;
     width: 70px;
-    color: white;
     padding: 5px 10px;
     border: none;
     border-radius: 5px;

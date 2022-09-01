@@ -1,8 +1,9 @@
-import { collection, getDocs } from 'firebase/firestore'
+import { collection, getDocs, doc, updateDoc } from 'firebase/firestore'
 import { db } from '../lib/firebase.prod'
 
+const userCollection = collection(db, 'users')
+
 const getUsers = async () => {
-    const userCollection = collection(db, 'users')
     const res = await getDocs(userCollection)
     const users = res.docs.map((user) => ({
         ...user.data(),
@@ -35,7 +36,36 @@ export async function getSuggestedProfiles(userId, following) {
     following.map((id) => (
         suggestedUsers = suggestedUsers.filter((user) => user.userId !== id)
     ))
-    console.log(suggestedUsers)
     return suggestedUsers
+}
 
+export async function followingUser(userId, profileId, isFollowing) {
+    const users = await getUsers()
+    const user = users.find((user) => user.userId === userId)
+    let following = user.following
+    following = [...following, profileId]
+    const newFollowing = { following: following }
+    const userInfo = doc(userCollection, user.docId)
+    console.log(userInfo)
+    if (!isFollowing) updateDoc(userInfo, newFollowing)
+}
+
+export async function followedByUser(userId, profileId, isFollowed) {
+    const users = await getUsers()
+    const user = users.find((user) => user.userId === profileId)
+    let followers = user.followers
+    followers = [...followers, userId]
+    const newFollower = { followers: followers }
+    const userInfo = doc(userCollection, user.docId)
+    console.log(userInfo)
+    if (!isFollowed) updateDoc(userInfo, newFollower)   
+}
+
+export async function getFollowing(userId, following) {
+    const users = await getUsers()
+    let suggestedUsers = users.filter((user) => user.userId !== userId)
+    following.map((id) => (
+        suggestedUsers = suggestedUsers.filter((user) => user.userId === id)
+    ))
+    return suggestedUsers
 }
