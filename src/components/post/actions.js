@@ -8,14 +8,13 @@ export default function Actions({ docId, totalLikes, likedPhoto, handleFocus }) 
     const { user: { uid: userId = ''}} = useContext(UserContext)
     const [toggleLiked, setToggleLiked] = useState(likedPhoto)
     const [likes, setLikes] = useState(totalLikes)
-    console.log('Actions')
 
     const handleToggleLiked = async () => {
         setToggleLiked((toggleLiked) => !toggleLiked)
 
         const photoCollection = collection(db, 'photos')
         const photo = doc(photoCollection, docId)
-        console.log(photo)
+  
         await updateDoc(photo, {
             likes: toggleLiked ? arrayRemove(userId) : arrayUnion(userId)
         })

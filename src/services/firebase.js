@@ -86,6 +86,5 @@ export async function getPhotos(userId, following) {
         })
     )
 
-    console.log(photosWithUserDetails)
     return photosWithUserDetails
 }

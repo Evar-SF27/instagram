@@ -73,7 +73,7 @@
 
 .comments {
     margin-left: 10px;
-    font-size: 15px;
+    font-size: 14px;
 }
 
 .comments__name {
@@ -98,5 +98,44 @@
     font-size: 14px;
     margin-top: 20px;
     margin-bottom: 20px;
+}
+
+.add__comment {
+    border-top: 1px solid rgb(208, 208, 208);
+    padding: 5px 0px;
+    margin: 10px 0px;
+    width: 98%;
+
+}
+
+.add__comment__form {
+    justify-content: space-between;
+}
+
+.add__comment__input {
+    border: none;
+    outline: none;
+    padding: 10px 15px;
+    width: 85%;
+    font-size: 14px;
+}
+
+.add__comment__input:hover {
+    border: 2px solid rgb(67, 161, 255);
+}
+
+.add__comment__btn {
+    border: none;
+    background-color: white;
+    color: rgb(67, 161, 255);
+    font-size: 16px;
+    font-weight: 800;
+    height: 100%;
+    width: 50px;
+    margin-left: 2px;
+}
+
+.opacity {
+    color: rgba(67, 161, 255, 0.25);
 }
 
