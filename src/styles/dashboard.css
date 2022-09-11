@@ -3,19 +3,27 @@
     width: 90%;
     margin: 20px auto;
     grid-template-columns: 60% 40%;
-    gap: 1rem;
+    gap: 1.5rem;
     padding: 15px 30px;
 }
 
 @media (max-width: 1000px) {
     .dashboard {
         display: flex;
+        padding: auto;
+        width: 600px;
     }
     .sidebar__main {
         display: none;
     }
     .timeline__main {
         margin: auto;
-        width: 70%;
     }
+}
+
+@media (max-width: 700px) {
+    .dashboard {
+        width: 500px;
+    }
+    
 }

@@ -1,19 +1,19 @@
 import React from 'react'
 import Skeleton from 'react-loading-skeleton'
+import usePhotos from '../../hooks/use-photos'
+import Post from '../post'
 import 'react-loading-skeleton/dist/skeleton.css'
 import './styles/feed.css'
 
-// Get logged in user's photos
-// Loading the photos
-// Create post component
-// No photos? Ask user to create some photos
-
-
 const Feed = () => {
-  return (
-    <div className='feed__main'>
-      <p>This is the Feed Section</p>
-    </div>
+  const { photos } = usePhotos()
+
+  return !photos ? (
+      <Skeleton count={4} height={400} />
+  ) : photos?.length > 0 ? (
+    photos.map((content) => <p key={content.docId}><Post key={content.docId} content={content}/></p>)
+  ) : (
+    <p className='text__sm'> Follow more people to see photos</p>
   )
 }
 

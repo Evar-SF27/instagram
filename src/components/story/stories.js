@@ -24,7 +24,7 @@ const Stories = ({ user }) => {
   return stories ? (
     <div className='story__main'>
       {stories.map((story) => (
-        <Story username={story.username} />
+        <Story username={story.username} key={story.userId}/>
       ))}
     </div>
   ) : (

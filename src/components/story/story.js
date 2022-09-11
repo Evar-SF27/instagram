@@ -5,8 +5,8 @@ import './styles/story.css'
 const Story = ({ username }) => {
   return (
     <Link to={`/p/${username}`} className='story'>
-    <img className='story__avatar' src={`/images/avatars/${username}.jpg`} alt='profile pic' />
-    <p className='story__text'>{username}</p>
+      <img className='story__avatar' src={`/images/avatars/${username}.jpg`} alt='profile pic' />
+      <p className='story__text'>{username}</p>
     </Link>
   )
 }

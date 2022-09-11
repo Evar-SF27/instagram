@@ -16,8 +16,8 @@ const getUsers = async () => {
 
 export async function doesUsernameExist(username) {
     
-    const users = await getUsers()
-    const user = users.find((user) => user.username === username)
+    const q = query(userCollection, where('username', '==', username))
+    const user = getDocs(q)
     const n = user.length > 0
 
     return n
@@ -44,7 +44,6 @@ export async function followingUser(userId, profileId, isFollowing) {
     following = [...following, profileId]
     const newFollowing = { following: following }
     const userInfo = doc(userCollection, docId)
-    console.log(userInfo)
     if (!isFollowing) updateDoc(userInfo, newFollowing)
 }
 
@@ -53,7 +52,6 @@ export async function followedByUser(userId, profileId, isFollowed) {
     followers = [...followers, userId]
     const newFollower = { followers: followers }
     const userInfo = doc(userCollection, docId)
-    console.log(userInfo)
     if (!isFollowed) updateDoc(userInfo, newFollower)   
 }
 
@@ -70,10 +68,24 @@ export async function getFollowing(userId, following) {
 export async function getPhotos(userId, following) {
     const q = query(photoCollection, where('userId', 'in', following))
     const photoSnap = await getDocs(q)
-    const photos = photoSnap.docs.map((photo) => ({
+    const userPhotos = photoSnap.docs.map((photo) => ({
         ...photo.data(),
         docId: photo.id
     }))
-    
-    console.log(photos)
+
+    const photosWithUserDetails = await Promise.all(
+        userPhotos.map(async (photo) => {
+            let userLikedPhoto = false
+            if (photo.likes.includes(userId)) {
+                userLikedPhoto = true
+            }
+            const user = await getUserByUserId(photo.userId)
+            const { username } = user
+
+            return { username, ...photo, userLikedPhoto }
+        })
+    )
+
+    console.log(photosWithUserDetails)
+    return photosWithUserDetails
 }
