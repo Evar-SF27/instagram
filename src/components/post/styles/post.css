@@ -120,7 +120,7 @@
     font-size: 14px;
 }
 
-.add__comment__input:hover {
+.add__comment__input:focus, .add__comment__input:hover {
     border: 2px solid rgb(67, 161, 255);
 }
 
