@@ -1,4 +1,4 @@
-import { collection, getDocs, doc, updateDoc, query, where } from 'firebase/firestore'
+import { collection, getDocs, doc, updateDoc, query, where, arrayUnion } from 'firebase/firestore'
 import { db } from '../lib/firebase.prod'
 
 const userCollection = collection(db, 'users')
@@ -15,12 +15,22 @@ const getUsers = async () => {
 }
 
 export async function doesUsernameExist(username) {
-    
     const q = query(userCollection, where('username', '==', username))
     const user = getDocs(q)
     const n = user.length > 0
 
     return n
+}
+
+export async function getUserByUsername(username) {
+    const q = query(userCollection, where('username', '==', username))
+    const result = await getDocs(q)
+    const user = result.docs.map((user) => ({
+        ...user.data(),
+        docId: user.id
+    }))
+
+    return user
 }
 
 export async function getUserByUserId(userId) {
@@ -40,19 +50,19 @@ export async function getSuggestedProfiles(userId, following) {
 }
 
 export async function followingUser(userId, profileId, isFollowing) {
-    let { docId, following } = await getUserByUserId(userId)
-    following = [...following, profileId]
-    const newFollowing = { following: following }
+    let { docId } = await getUserByUserId(userId)
     const userInfo = doc(userCollection, docId)
-    if (!isFollowing) updateDoc(userInfo, newFollowing)
+    if (!isFollowing) updateDoc(userInfo, {
+        following: arrayUnion(profileId)
+    })
 }
 
 export async function followedByUser(userId, profileId, isFollowed) {
-    let { docId, followers } = await getUserByUserId(profileId)
-    followers = [...followers, userId]
-    const newFollower = { followers: followers }
+    let { docId } = await getUserByUserId(profileId)
     const userInfo = doc(userCollection, docId)
-    if (!isFollowed) updateDoc(userInfo, newFollower)   
+    if (!isFollowed) updateDoc(userInfo, {
+        followers: arrayUnion(userId)
+    })   
 }
 
 export async function getFollowing(userId, following) {
@@ -87,4 +97,29 @@ export async function getPhotos(userId, following) {
     )
 
     return photosWithUserDetails
+}
+
+export async function getUserPhotosByUsername(username) {
+    const [{ userId }] = await getUserByUsername(username)
+    const q = query(photoCollection, where('userId', '==', userId))
+    const photoSnap = await getDocs(q)
+    const userPhotos = photoSnap.docs.map((photo) => ({
+        ...photo.data(),
+        docId: photo.id
+    }))
+
+    return userPhotos
+}
+
+export async function isUserFollowingProfile(loggedInUsername, profileUserId) {
+    const query_one = query(userCollection, where('username', '==', loggedInUsername))
+    const userSnap = await getDocs(query_one)
+    const users = userSnap.docs.map((user) => ({
+        ...user.data(),
+        docId: user.id
+    }))
+    const following = users[0].following
+    const isUserFollowing = following.includes(profileUserId)
+    
+    return isUserFollowing
 }

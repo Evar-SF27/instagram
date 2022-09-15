@@ -8,9 +8,12 @@ import ProtectedRoute from './helpers/protectedRoutes';
 import IsUserLoggedIn from './helpers/isUserLoggedIn';
 
 
+
 const Login = lazy(() => import ('./pages/login'))
 const SignUp = lazy(() => import ('./pages/signup'))
 const Dashboard = lazy(() => import ('./pages/dashboard'))
+const Profile = lazy(() => import ('./pages/profile'))
+const NotFound = lazy(() => import('./pages/notFound'))
 
 
 function App() {
@@ -23,14 +26,17 @@ function App() {
             <Route path={ROUTES.DASHBOARD} element={
               <ProtectedRoute user={user} exact>
                 <Dashboard />
+                {/* {Dashboard} */}
               </ProtectedRoute>
             } />
+            <Route path={ROUTES.PROFILE} element={<Profile />} />
             <Route path={ROUTES.SIGN_UP} element={
               <IsUserLoggedIn user={user}><SignUp /></IsUserLoggedIn>
             } />
             <Route path={ROUTES.LOGIN} element={
               <IsUserLoggedIn user={user}><Login /></IsUserLoggedIn>
             } />
+            <Route path='*' element={<NotFound />} />
           </Routes>  
         </Suspense>
       </Router>

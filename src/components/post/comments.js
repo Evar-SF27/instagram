@@ -6,7 +6,7 @@ import AddComment from './addComment';
 
 export default function Comments({ docId, comments: allComments, posted, commentInput }) {
   const [comments, setComments] = useState(allComments);
-  const [commentsSlice, setCommentsSlice] = useState(3);
+  const [commentsSlice, setCommentsSlice] = useState(1);
 
   const showNextComments = () => {
     setCommentsSlice(commentsSlice + 3);
@@ -34,7 +34,7 @@ export default function Comments({ docId, comments: allComments, posted, comment
               }
             }}
           >
-            View more comments
+            View all comments
           </button>
         )}
         
