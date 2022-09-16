@@ -1,4 +1,4 @@
-import { collection, getDocs, doc, updateDoc, query, where, arrayUnion } from 'firebase/firestore'
+import { collection, getDocs, doc, updateDoc, query, where, arrayUnion, arrayRemove } from 'firebase/firestore'
 import { db } from '../lib/firebase.prod'
 
 const userCollection = collection(db, 'users')
@@ -122,4 +122,19 @@ export async function isUserFollowingProfile(loggedInUsername, profileUserId) {
     const isUserFollowing = following.includes(profileUserId)
     
     return isUserFollowing
+}
+
+export async function followUser(isFollowing, userDocId, profileDocId, userId, profileId) {
+    const userInfo = doc(userCollection, userDocId)
+    const profileInfo = doc(userCollection, profileDocId)
+    
+    if (isFollowing) {
+        updateDoc(userInfo, { following: arrayRemove(profileId) })
+        updateDoc(profileInfo, { followers: arrayRemove(userId) })
+        console.log('unfollowed')
+    } else {
+        updateDoc(userInfo, { following: arrayUnion(profileId) })
+        updateDoc(profileInfo, { followers: arrayUnion(userId) })
+        console.log('followed')
+    }
 }
