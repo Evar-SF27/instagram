@@ -103,6 +103,7 @@
     color: black;
     font-weight: 600;
     padding-right: 5px;
+    font-size: 14px;
 }
 
 .optionsOne {
@@ -136,10 +137,57 @@
     font-size: 14px;
 }
 
+.profile__photos__container {
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    gap: 1%;
+}
+
+.profile__photo {
+    width: 100%;
+    height: 100%;
+}
+
+.photo__relative {
+    position: relative;
+}
+
+.photo__relative:hover+.profile__icons__hover {
+    display: none;
+}
+
+.profile__icons__hover {
+    display: flex;
+    background: rgba(0, 0, 0, 0.471);
+    width: 100%;
+    height: 100%;
+    justify-content: space-around;
+    align-items: center;
+    color: white;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.profile__p {
+    display: flex;
+    font-size: 18px;
+    align-items: center;
+}
+
+.photos__icon {
+    width: 30px;
+}
+
+.photos__text {
+    margin-left: 5px;
+    font-weight: 700;
+}
+
 @media (min-width: 736px) {
     .profile__header {
-        margin: 35px auto;
-        max-width: 935px;
+        margin: 35px 5%;
+        max-width: 1000px;
     }
 
     .profile__innerHeader {
